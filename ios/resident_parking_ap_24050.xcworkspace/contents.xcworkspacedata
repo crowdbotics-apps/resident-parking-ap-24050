@@ -7,4 +7,7 @@
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:/Users/elina/Desktop/dev/mobile/resident-parking-ap-24050/ios/resident_parking_ap_24050.xcodeproj">
+   </FileRef>
 </Workspace>

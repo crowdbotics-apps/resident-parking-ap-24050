@@ -1,7 +1,7 @@
 export const appConfig = {
   // todo add library to handle env variables
-  emailAuthAPIEndPoint: "https://resident-parking-ap-24050.botics.co",
-  defaultTimeout: 5000,
-  pubPublishKey: 'pub-c-09038c51-029c-47a7-95f2-b6c7407afb12',
-  pubSubscribeKey: 'sub-c-6b1bee04-ba9f-11e9-8753-ce76e7dc5905'
+  API_ENDPOINT: 'https://patient-recipe-22482.botics.co',
+  defaultTimeout: 15000,
+  pubPublishKey: 'pub-c-62204ec8-8a06-4cde-963c-b8b602b3a241',
+  pubSubscribeKey: 'sub-c-63754b7c-a884-11ea-b76e-1eafcc03cece',
 };

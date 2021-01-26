@@ -1,0 +1,14 @@
+import React from 'react';
+import { Text } from 'react-native';
+
+import styles from './styles';
+
+function ErrorBox({ errorText }) {
+  return (
+    <Text style={[styles.container, styles.errorText]}>
+      {errorText}
+    </Text>
+  );
+}
+
+export default React.memo(ErrorBox);

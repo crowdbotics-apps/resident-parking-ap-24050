@@ -1,11 +1,11 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {Provider as ReduxProvider} from 'react-redux';
+import { View, Text, StyleSheet } from 'react-native';
+import { Provider as ReduxProvider } from 'react-redux';
 
-import SplashScreen from './src/features/SplashScreen';
-import {store} from './src/store';
+import SplashScreen from './src/containers/auth/screens/Splash';
+import { store } from './src/redux/store';
 import NavigatorProvider from './src/navigator/mainNavigator';
-import {setupHttpConfig} from './src/utils/http';
+import { setupHttpConfig } from './src/utils/http';
 import * as NavigationService from './src/navigator/NavigationService';
 
 export default class App extends React.Component {
@@ -32,7 +32,7 @@ export default class App extends React.Component {
 
   loadAssets = async () => {
     // add any loading assets here
-    this.setState({isLoaded: true});
+    this.setState({ isLoaded: true });
   };
 
   renderLoading = () => (
@@ -47,7 +47,8 @@ export default class App extends React.Component {
         style={styles.flex}
         ref={(nav) => {
           this.navigator = nav;
-        }}>
+        }}
+      >
         <View style={[styles.flex]}>
           <SplashScreen />
         </View>
@@ -55,10 +56,9 @@ export default class App extends React.Component {
     </ReduxProvider>
   );
 
-  render = () =>
-    this.state.isLoaded ? this.renderApp() : this.renderLoading();
+  render = () => (this.state.isLoaded ? this.renderApp() : this.renderLoading());
 }
 
 const styles = StyleSheet.create({
-  flex: {flex: 1},
+  flex: { flex: 1 },
 });

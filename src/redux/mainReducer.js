@@ -1,19 +1,13 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 
 /**
  * You can import more reducers here
  */
+import { AuthReducer } from '../containers/auth/redux/reducers';
+import { AppReducer } from '../containers/app/redux/reducers';
 
-
-//@BlueprintReduxImportInsertion
 
 export const combinedReducers = combineReducers({
-  blank: (state, action) => {
-    if (state == null) state = [];
-    return state;
-  },
-
-
-  //@BlueprintReduxCombineInsertion
-
+  Auth: AuthReducer,
+  App: AppReducer,
 });

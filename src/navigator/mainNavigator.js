@@ -1,34 +1,15 @@
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-import {createDrawerNavigator} from 'react-navigation-drawer';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
-import SplashScreen from "../features/SplashScreen";
-import SideMenu from './sideMenu';
-//@BlueprintImportInsertion
+import AuthNavigator from '../containers/auth/navigator';
+import AppNavigator from '../containers/app/navigator';
+import Splash from '../containers/auth/screens/Splash';
 
-/**
- * new navigators can be imported here
- */
+const SwitchNavigator = createSwitchNavigator({
+  Splash: { screen: Splash },
+  App: AppNavigator,
+  Auth: AuthNavigator,
+});
 
-const AppNavigator = {
-
-    //@BlueprintNavigationInsertion
-
-    /** new navigators can be added here */
-    SplashScreen: {
-      screen: SplashScreen
-    }
-};
-
-const DrawerAppNavigator = createDrawerNavigator(
-  {
-    ...AppNavigator,
-  },
-  {
-    contentComponent: SideMenu
-  },
-);
-
-const AppContainer = createAppContainer(DrawerAppNavigator);
+const AppContainer = createAppContainer(SwitchNavigator);
 
 export default AppContainer;
