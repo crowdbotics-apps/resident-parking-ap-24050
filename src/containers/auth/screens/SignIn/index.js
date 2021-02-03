@@ -91,7 +91,7 @@ class SignIn extends React.PureComponent {
             onChangeText={(val) => this.handleInputChange('password', val)}
           />
 
-          <Text onPress={() => navigation.push('Request')} style={styles.link}>Request account.</Text>
+          {/* <Text onPress={() => navigation.push('Request')} style={styles.link}>Request account.</Text> */}
           {/* <Text onPress={this.goToPasswordRecover} style={styles.link}>Property rules.</Text> */}
 
           {this.renderErrors()}
