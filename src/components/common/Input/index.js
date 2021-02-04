@@ -9,11 +9,8 @@ import { colors } from '../../../utils';
 import styles from './styles';
 
 class Input extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isPasswordHidden: true,
-    };
+  state = {
+    isPasswordHidden: true,
   }
 
   togglePasswordVisibility = () => {

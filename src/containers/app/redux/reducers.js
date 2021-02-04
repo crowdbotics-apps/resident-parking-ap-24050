@@ -9,6 +9,7 @@ const initialState = {
   residents: [],
   whitelist: [],
   community: {},
+  profile: {},
 };
 
 export const AppReducer = (state = initialState, action) => {
@@ -25,6 +26,8 @@ export const AppReducer = (state = initialState, action) => {
       return { ...state, whitelist: action.payload };
     case successType(actions.APP_GET_COMMUNITY):
       return { ...state, community: action.payload };
+    case successType(actions.APP_GET_PROFILE):
+      return { ...state, profile: action.payload };
     default:
       return state;
   }

@@ -4,12 +4,16 @@ import { Text, View } from 'react-native';
 import styles from './styles';
 
 function LabelValue(props) {
-  const { label, value } = props;
+  const { label, value, textTransform = 'capitalize' } = props;
+
+  if (!value) {
+    return null;
+  }
 
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{`${label}: `}</Text>
-      <Text style={styles.value}>{value}</Text>
+      <Text style={[styles.value, { textTransform }]}>{value}</Text>
     </View>
   );
 }

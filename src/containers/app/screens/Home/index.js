@@ -17,7 +17,7 @@ const Home = ({ navigation }) => {
       case 'cars':
         return <Cars navigation={navigation} />;
       case 'guests':
-        return <Guests />;
+        return <Guests navigation={navigation} />;
       case 'community':
         return <Community onNavigate={setActiveTab} />;
       case 'rules':

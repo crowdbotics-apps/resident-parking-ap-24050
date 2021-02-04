@@ -22,16 +22,15 @@ export const getWhitelist = (name) => ({
   name,
 });
 
-export const addWhitelist = (data) => ({
-  type: requestType(actions.APP_ADD_WHITELIST),
+export const addGuest = (data) => ({
+  type: requestType(actions.APP_ADD_GUEST),
   data,
-});
-
-export const removeWhitelist = (id) => ({
-  type: requestType(actions.APP_REMOVE_WHITELIST),
-  id,
 });
 
 export const getCommunity = () => ({
   type: requestType(actions.APP_GET_COMMUNITY),
+});
+
+export const getProfile = () => ({
+  type: requestType(actions.APP_GET_PROFILE),
 });

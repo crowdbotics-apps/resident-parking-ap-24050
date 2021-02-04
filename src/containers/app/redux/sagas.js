@@ -24,12 +24,12 @@ function getWhitelist({ name }) {
   return request.get(`/api/v1/whitelist/?license_plate=${name || ''}`);
 }
 
-function addWhitelist({ data }) {
-  return request.post('/api/v1/whitelist/', data);
+function addGuest({ data }) {
+  return request.post('/api/v1/guests/', data);
 }
 
-function removeWhitelist({ id }) {
-  return request.delete(`/api/v1/whitelist/${id}/`);
+function getProfile() {
+  return request.get('/api/v1/resident-profile/');
 }
 
 function handleGetCars({ licensePlate }) {
@@ -76,27 +76,15 @@ function handleGetWhitelist({ name }) {
   });
 }
 
-function handleAddWhitelist({ data }) {
+function handleAddGuest({ data }) {
   return sagasRunner({
-    actionType: actions.APP_ADD_WHITELIST,
+    actionType: actions.APP_ADD_GUEST,
     loadingType: actions.APP_CHANGE_LOADING_STATE,
-    updateType: requestType(actions.APP_GET_WHITELIST),
-    errorMessage: 'Unable to add to whitelist.',
+    updateType: requestType(actions.APP_GET_GUESTS),
+    errorMessage: 'Unable to add guest.',
     alertError: true,
-    callFunc: addWhitelist,
+    callFunc: addGuest,
     callData: { data },
-  });
-}
-
-function handleRemoveWhitelist({ id }) {
-  return sagasRunner({
-    actionType: actions.APP_REMOVE_WHITELIST,
-    loadingType: actions.APP_CHANGE_LOADING_STATE,
-    updateType: requestType(actions.APP_GET_WHITELIST),
-    errorMessage: 'Unable to remove from whitelist.',
-    alertError: true,
-    callFunc: removeWhitelist,
-    callData: { id },
   });
 }
 
@@ -110,12 +98,22 @@ function handleGetCommunity() {
   });
 }
 
+function handleGetProfile() {
+  return sagasRunner({
+    actionType: actions.APP_GET_PROFILE,
+    loadingType: actions.APP_CHANGE_LOADING_STATE,
+    errorMessage: 'Unable to get profile.',
+    alertError: true,
+    callFunc: getProfile,
+  });
+}
+
 export default all([
   takeLatest(requestType(actions.APP_GET_CARS), handleGetCars),
   takeLatest(requestType(actions.APP_GET_GUESTS), handleGetGuests),
   takeLatest(requestType(actions.APP_GET_RESIDENTS), handleGetResidents),
   takeLatest(requestType(actions.APP_GET_WHITELIST), handleGetWhitelist),
-  takeLatest(requestType(actions.APP_ADD_WHITELIST), handleAddWhitelist),
-  takeLatest(requestType(actions.APP_REMOVE_WHITELIST), handleRemoveWhitelist),
+  takeLatest(requestType(actions.APP_ADD_GUEST), handleAddGuest),
   takeLatest(requestType(actions.APP_GET_COMMUNITY), handleGetCommunity),
+  takeLatest(requestType(actions.APP_GET_PROFILE), handleGetProfile),
 ]);

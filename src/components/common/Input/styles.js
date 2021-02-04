@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   input: {
     paddingVertical: 5,
     width: '100%',
-    marginVertical: 10,
+    marginVertical: 8,
     fontSize: 17,
     color: colors.darkGrey,
     borderBottomColor: colors.grey,
