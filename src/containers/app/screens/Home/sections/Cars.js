@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import {
-  View, FlatList, Text, ImageBackground, Image, TouchableOpacity,
+  View, FlatList, Text, ImageBackground, Image, TouchableOpacity, ScrollView, Platform,
 } from 'react-native';
 
 import Header from '../../../../../components/shared/Header';
@@ -43,49 +43,51 @@ const Cars = (props) => {
 
   return (
     <View style={styles.sectionContainer}>
-      <ImageBackground resizeMode="contain" style={{ width: '100%', height: 150 }} source={require('../../../../../assets/images/profile_cover.png')} />
+      <ScrollView>
+        <ImageBackground resizeMode="contain" style={{ width: '100%', height: Platform.OS === 'ios' ? 140 : 130 }} source={require('../../../../../assets/images/profile_cover.png')} />
 
-      <Text style={styles.profileName}>{props.profile?.full_name}</Text>
-      <Text style={styles.profileSubtitle}>Resident</Text>
+        <Text style={styles.profileName}>{props.profile?.full_name}</Text>
+        <Text style={styles.profileSubtitle}>Resident</Text>
 
-      <Header
-        content={(
-          <View style={styles.row}>
-            <TouchableOpacity onPress={() => navigation.push('Credentials')} style={styles.iconsRow}>
-              <Image style={{ width: 30, height: 30, marginBottom: 12 }} source={require('../../../../../assets/icons/pencil.png')} />
-              <Text style={styles.profileText}>Credentials</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.push('AddCar')} style={styles.iconsRow}>
-              <Image style={{ width: 35, height: 35, marginBottom: 8 }} source={require('../../../../../assets/icons/plus.png')} />
-              <Text style={styles.profileText}>Add car</Text>
-            </TouchableOpacity>
-          </View>
+        <Header
+          content={(
+            <View style={styles.row}>
+              <TouchableOpacity onPress={() => navigation.push('Credentials')} style={styles.iconsRow}>
+                <Image style={{ width: 30, height: 30, marginBottom: 12 }} source={require('../../../../../assets/icons/pencil.png')} />
+                <Text style={styles.profileText}>Credentials</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.push('AddCar')} style={styles.iconsRow}>
+                <Image style={{ width: 35, height: 35, marginBottom: 8 }} source={require('../../../../../assets/icons/plus.png')} />
+                <Text style={styles.profileText}>Add car</Text>
+              </TouchableOpacity>
+            </View>
         )}
-        containerStyle={{ marginTop: -20 }}
-      />
+          containerStyle={{ marginTop: -20 }}
+        />
 
-      <FlatList
-        horizontal
-        pagingEnabled
-        ref={listRef}
-        onScrollEndDrag={onScrollEnd}
-        showsHorizontalScrollIndicator={false}
-        data={props.cars}
-        keyExtractor={(item) => item.license_plate}
-        ListEmptyComponent={<Text style={{ textAlign: 'center', flex: 1 }}>No cars found.</Text>}
-        renderItem={({ item, index }) => (
-          <CarCard
-            isFirst={index === 0}
-            isLast={index === props.cars.length - 1}
-            onNext={onNext}
-            onPrev={onPrev}
-            item={item}
-            onEdit={() => navigation.push('AddCar', { carData: item })}
-          />
-        )}
-      />
+        <FlatList
+          horizontal
+          pagingEnabled
+          ref={listRef}
+          onScrollEndDrag={onScrollEnd}
+          showsHorizontalScrollIndicator={false}
+          data={props.cars}
+          keyExtractor={(item) => item.license_plate}
+          ListEmptyComponent={<Text style={{ textAlign: 'center', flex: 1 }}>No cars found.</Text>}
+          renderItem={({ item, index }) => (
+            <CarCard
+              isFirst={index === 0}
+              isLast={index === props.cars.length - 1}
+              onNext={onNext}
+              onPrev={onPrev}
+              item={item}
+              onEdit={() => navigation.push('AddCar', { carData: item })}
+            />
+          )}
+        />
 
-      <Text style={styles.pagination}>{`${activeIndex + 1} of ${props.cars.length}`}</Text>
+        <Text style={styles.pagination}>{`${activeIndex + 1} of ${props.cars.length}`}</Text>
+      </ScrollView>
     </View>
   );
 };

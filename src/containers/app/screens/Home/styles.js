@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 import { colors } from '../../../../utils';
 
@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     alignItems: 'stretch',
   },
   sectionContainer: {
-    flex: 6,
+    flex: Platform.OS === 'ios' ? 6 : 5.5,
   },
   title: {
     fontSize: 24,

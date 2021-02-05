@@ -1,11 +1,11 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 import { colors } from '../../../utils';
 
 export const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: 110,
+    height: Platform.OS === 'ios' ? 110 : 100,
     maxHeight: 110,
     minHeight: 11,
     justifyContent: 'flex-end',
@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
     fontWeight: '400',
     fontSize: 11,
     color: colors.darkGrey,
-    marginTop: 5,
+    marginTop: 2,
     width: 65,
     textAlign: 'center',
   },

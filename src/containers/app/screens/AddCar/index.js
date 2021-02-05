@@ -38,6 +38,9 @@ const AddCar = (props) => {
       if (!values.image.uri) {
         delete values.image;
       }
+      delete values.property;
+      delete values.resident;
+
       props.updateCar(values);
     } else {
       props.addCar(values);

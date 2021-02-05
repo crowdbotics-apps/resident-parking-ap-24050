@@ -66,12 +66,11 @@ class SignIn extends React.PureComponent {
 
   render() {
     const { email, password } = this.state;
-    const { navigation } = this.props;
 
     return (
       <KeyboardWrapper>
         <ScrollView keyboardShouldPersistTaps="never" contentContainerStyle={styles.screen}>
-          <View style={{ flex: 2 }} />
+          <View style={{ flex: 1 }} />
 
           <Text style={styles.mainTitle}>Welcome</Text>
           <Text style={styles.subTitle}>Sign in.</Text>
@@ -96,13 +95,15 @@ class SignIn extends React.PureComponent {
 
           {this.renderErrors()}
 
-          <View style={{ flex: 1.8 }} />
+          <View style={{ flex: 1.5 }} />
 
           <View style={styles.buttonsContainer}>
             <Button theme="dark" onPress={this.submitLogin}>
               Sign in
             </Button>
           </View>
+
+          <View style={{ flex: 1 }} />
         </ScrollView>
       </KeyboardWrapper>
     );
