@@ -23,7 +23,7 @@ const Home = ({ navigation }) => {
       case 'rules':
         return <CommunityRules onNavigate={setActiveTab} />;
       default:
-        return <Cars />;
+        return <Cars navigation={navigation} />;
     }
   };
 

@@ -12,7 +12,7 @@ const { width } = Dimensions.get('screen');
 
 const CarCard = (props) => {
   const {
-    item, isLast, isFirst, onNext, onPrev,
+    item, isLast, isFirst, onNext, onPrev, onEdit,
   } = props;
 
   return (
@@ -29,7 +29,7 @@ const CarCard = (props) => {
         </TouchableOpacity>
       </View>
 
-      <Text style={styles.link}>Edit Car Details</Text>
+      <Text onPress={onEdit} style={styles.link}>Edit Car Details</Text>
 
       <Image
         style={styles.image}

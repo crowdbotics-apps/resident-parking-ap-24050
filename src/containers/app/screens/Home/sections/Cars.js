@@ -80,6 +80,7 @@ const Cars = (props) => {
             onNext={onNext}
             onPrev={onPrev}
             item={item}
+            onEdit={() => navigation.push('AddCar', { carData: item })}
           />
         )}
       />

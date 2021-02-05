@@ -1,20 +1,25 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import {
-  View, SafeAreaView, Text, Alert,
+  View, SafeAreaView, Text, Alert, Image,
+  TouchableOpacity, ActivityIndicator,
 } from 'react-native';
-import moment from 'moment';
+import Icon from 'react-native-vector-icons/Entypo';
 
 import { styles } from './styles';
 import Input from '../../../../components/common/Input';
 import Button from '../../../../components/common/Button';
+import Loader from '../../../../components/common/Loader';
+import ImageUploader from '../../../../components/common/ImageUploader';
 import Header from '../../../../components/shared/Header';
-import { addGuest } from '../../redux/actions';
+import { addCar, updateCar } from '../../redux/actions';
+import { colors } from '../../../../utils';
 
 const AddCar = (props) => {
-  const [values, setValues] = useState({
-    date: new Date(),
-  });
+  const carData = props.navigation.getParam('carData');
+  const [values, setValues] = useState(carData || {});
+  const [newImageLoading, setImageLoading] = useState(false);
+
   const onSave = () => {
     if (!values?.license_plate) {
       Alert.alert('License plate is a required field.');
@@ -28,12 +33,44 @@ const AddCar = (props) => {
       Alert.alert('Car color is a required field.');
       return;
     }
-    props.addGuest({ ...values, date: moment(values.date).format('YYYY-MM-DD') });
-    props.navigation.goBack();
+
+    if (carData) {
+      if (!values.image.uri) {
+        delete values.image;
+      }
+      props.updateCar(values);
+    } else {
+      props.addCar(values);
+    }
   };
 
   const onChange = (key, value) => {
     setValues({ ...values, [key]: value });
+  };
+
+  const selectImage = (img) => {
+    setImageLoading(true);
+    const fileNameParts = img.filename ? img.filename?.split('.') : [];
+    const extension = fileNameParts.pop();
+    const isHeic = extension?.toLowerCase() === 'heic';
+    const finalName = isHeic || !img.filename || !extension
+      ? `${fileNameParts.join() || Math.random()}.jpg`
+      : img.filename;
+    const item = {
+      name: finalName,
+      type: img.type,
+      uri: img.uri,
+    };
+
+    setValues({ ...values, image: item });
+    setImageLoading(false);
+  };
+
+  const removeImage = () => {
+    setValues({
+      ...values,
+      image: null,
+    });
   };
 
   return (
@@ -67,9 +104,27 @@ const AddCar = (props) => {
             placeholder="Parking Space"
           />
 
-          <Text style={styles.photoInfo}>
+          {/* <Text style={styles.photoInfo}>
             In order to request new vehicle, please upload photos of your Registration, Insurance, Licence Plate, Vehicle, Drivers Licence:
-          </Text>
+          </Text> */}
+
+          {values.image ? (
+            <View style={{ position: 'relative' }}>
+              <Image style={styles.image} source={{ uri: values.image.uri || values.image }} />
+              <TouchableOpacity style={styles.cross} onPress={() => removeImage()}>
+                <Icon color="#000" size={16} name="circle-with-cross" />
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <View style={styles.uploadContainer}>
+              <ImageUploader onUpload={selectImage} style={styles.addContainer}>
+                <Image style={styles.addIcon} source={require('../../../../assets/images/plus.png')} />
+                <Text style={{ color: colors.darkGrey, marginLeft: 8, fontSize: 16 }}>Upload</Text>
+              </ImageUploader>
+            </View>
+          )}
+
+          {newImageLoading ? <ActivityIndicator /> : null}
 
           <View style={{ flexDirection: 'row', marginTop: 32 }}>
             <Button small block={false} buttonStyle={styles.cancelButton} onPress={() => props.navigation.goBack()}>
@@ -81,16 +136,19 @@ const AddCar = (props) => {
           </View>
         </View>
       </View>
+
+      <Loader isLoading={props.isLoading} />
     </SafeAreaView>
   );
 };
 
 const mapStateToProps = (state) => ({
-  user: state.Auth.user,
+  isLoading: state.App.isLoading,
 });
 
 const mapDispatchToProps = {
-  addGuest,
+  addCar,
+  updateCar,
 };
 
 export default connect(

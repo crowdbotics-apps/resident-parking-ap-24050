@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import * as ImagePicker from 'react-native-image-picker';
+import { launchImageLibrary } from 'react-native-image-picker';
 
 import { styles } from './styles';
 
@@ -11,9 +11,7 @@ class ImageUploader extends React.PureComponent {
     (it can also be null or omitted for default options),
     * The second arg is the callback which sends object: response (more info in the API Reference)
     */
-    ImagePicker.launchImageLibrary({}, (response) => {
-      console.log('Response = ', response);
-
+    launchImageLibrary({}, (response) => {
       if (response.didCancel) {
         console.log('User cancelled image picker');
       } else if (response.error) {

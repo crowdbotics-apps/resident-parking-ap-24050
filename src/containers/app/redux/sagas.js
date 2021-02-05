@@ -28,6 +28,21 @@ function addGuest({ data }) {
   return request.post('/api/v1/guests/', data);
 }
 
+function addCar({ data }) {
+  const keys = Object.keys(data);
+  // eslint-disable-next-line
+  const body = new FormData();
+  keys.forEach((key) => {
+    body.append([key], data[key]);
+  });
+
+  return request.post('/api/v1/cars/', body);
+}
+
+function updateCar({ data }) {
+  return request.patch(`/api/v1/cars/${data?.id}/`, data);
+}
+
 function getProfile() {
   return request.get('/api/v1/resident-profile/');
 }
@@ -88,6 +103,32 @@ function handleAddGuest({ data }) {
   });
 }
 
+function handleAddCar({ data }) {
+  return sagasRunner({
+    actionType: actions.APP_ADD_CAR,
+    loadingType: actions.APP_CHANGE_LOADING_STATE,
+    updateType: requestType(actions.APP_GET_CARS),
+    route: 'Home',
+    errorMessage: 'Unable to add car.',
+    alertError: true,
+    callFunc: addCar,
+    callData: { data },
+  });
+}
+
+function handleUpdateCar({ data }) {
+  return sagasRunner({
+    actionType: actions.APP_UPDATE_CAR,
+    loadingType: actions.APP_CHANGE_LOADING_STATE,
+    updateType: requestType(actions.APP_GET_CARS),
+    route: 'Home',
+    errorMessage: 'Unable to update car.',
+    alertError: true,
+    callFunc: updateCar,
+    callData: { data },
+  });
+}
+
 function handleGetCommunity() {
   return sagasRunner({
     actionType: actions.APP_GET_COMMUNITY,
@@ -116,4 +157,6 @@ export default all([
   takeLatest(requestType(actions.APP_ADD_GUEST), handleAddGuest),
   takeLatest(requestType(actions.APP_GET_COMMUNITY), handleGetCommunity),
   takeLatest(requestType(actions.APP_GET_PROFILE), handleGetProfile),
+  takeLatest(requestType(actions.APP_ADD_CAR), handleAddCar),
+  takeLatest(requestType(actions.APP_UPDATE_CAR), handleUpdateCar),
 ]);

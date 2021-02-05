@@ -27,6 +27,16 @@ export const addGuest = (data) => ({
   data,
 });
 
+export const addCar = (data) => ({
+  type: requestType(actions.APP_ADD_CAR),
+  data,
+});
+
+export const updateCar = (data) => ({
+  type: requestType(actions.APP_UPDATE_CAR),
+  data,
+});
+
 export const getCommunity = () => ({
   type: requestType(actions.APP_GET_COMMUNITY),
 });

@@ -6,3 +6,5 @@ export const APP_GET_WHITELIST = 'APP_GET_WHITELIST';
 export const APP_ADD_GUEST = 'APP_ADD_GUEST';
 export const APP_GET_COMMUNITY = 'APP_GET_COMMUNITY';
 export const APP_GET_PROFILE = 'APP_GET_PROFILE';
+export const APP_ADD_CAR = 'APP_ADD_CAR';
+export const APP_UPDATE_CAR = 'APP_UPDATE_CAR';

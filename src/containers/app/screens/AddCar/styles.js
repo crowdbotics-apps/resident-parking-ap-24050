@@ -11,14 +11,13 @@ export const styles = StyleSheet.create({
   addContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    flex: 1,
-    margin: 8,
+    justifyContent: 'center',
+    margin: 16,
   },
   addIcon: {
     width: 45,
     height: 45,
     resizeMode: 'contain',
-    marginTop: 12,
   },
   input: {
     borderWidth: 1,
@@ -50,5 +49,25 @@ export const styles = StyleSheet.create({
     color: colors.darkGrey,
     fontSize: 11,
     marginTop: 24,
+  },
+  images: {
+    padding: 20,
+  },
+  image: {
+    width: 120,
+    height: 100,
+    marginTop: 20,
+    resizeMode: 'cover',
+  },
+  uploadContainer: {
+    borderWidth: 1,
+    borderStyle: 'dashed',
+    borderRadius: 5,
+    marginTop: 20,
+  },
+  cross: {
+    position: 'absolute',
+    bottom: 95,
+    left: 115,
   },
 });
