@@ -8,7 +8,7 @@ import Header from '../../../../components/shared/Header';
 import { getProfile } from '../../redux/actions';
 import Button from '../../../../components/common/Button';
 
-const AddToWhitelist = (props) => {
+const Credentials = (props) => {
   const { profile, navigation } = props;
 
   useEffect(() => {
@@ -74,4 +74,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(AddToWhitelist);
+)(Credentials);

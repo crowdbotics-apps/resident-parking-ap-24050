@@ -42,7 +42,7 @@ const Guests = (props) => {
         keyExtractor={(item) => item.license_plate}
         ListEmptyComponent={<Text style={{ textAlign: 'center' }}>No guests found.</Text>}
         renderItem={({ item }) => (
-          <InfoCard title={item.license_plate || 'Unknown'} tags={[item.name, item.date, item.car_model, item.car_color, item.description]} />
+          <InfoCard title={item.license_plate || 'Unknown'} tags={[item.name, `From ${item.date} to ${item.date_to}`, item.car_model, item.car_color, item.description]} />
         )}
       />
     </View>

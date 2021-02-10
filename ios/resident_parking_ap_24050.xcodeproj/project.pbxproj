@@ -871,9 +871,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.crowdbotics.ResidentsApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.crowdbotics.Residentapp;
 				PRODUCT_NAME = resident_parking_ap_24050;
-				PROVISIONING_PROFILE_SPECIFIER = "Guards App";
+				PROVISIONING_PROFILE_SPECIFIER = Residentapp;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -898,9 +898,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.crowdbotics.ResidentsApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.crowdbotics.Residentapp;
 				PRODUCT_NAME = resident_parking_ap_24050;
-				PROVISIONING_PROFILE_SPECIFIER = "Guards App";
+				PROVISIONING_PROFILE_SPECIFIER = Residentapp;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

@@ -73,7 +73,11 @@ const Cars = (props) => {
           showsHorizontalScrollIndicator={false}
           data={props.cars}
           keyExtractor={(item) => item.license_plate}
-          ListEmptyComponent={<Text style={{ textAlign: 'center', flex: 1 }}>No cars found.</Text>}
+          ListEmptyComponent={(
+            <Text style={{ paddingHorizontal: 20 }}>
+              No cars found.
+            </Text>
+          )}
           renderItem={({ item, index }) => (
             <CarCard
               isFirst={index === 0}
@@ -86,7 +90,10 @@ const Cars = (props) => {
           )}
         />
 
-        <Text style={styles.pagination}>{`${activeIndex + 1} of ${props.cars.length}`}</Text>
+        {props.cars?.length ? (
+          <Text style={styles.pagination}>{`${activeIndex + 1} of ${props.cars.length}`}</Text>
+        ) : null}
+
       </ScrollView>
     </View>
   );

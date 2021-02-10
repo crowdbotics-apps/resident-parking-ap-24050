@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   label: {
     color: colors.grey,
     fontSize: 16,
-    marginTop: 24,
+    marginTop: 12,
   },
 });
 

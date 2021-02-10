@@ -22,9 +22,10 @@ export const getWhitelist = (name) => ({
   name,
 });
 
-export const addGuest = (data) => ({
+export const addGuest = (data, callback) => ({
   type: requestType(actions.APP_ADD_GUEST),
   data,
+  callback,
 });
 
 export const addCar = (data) => ({

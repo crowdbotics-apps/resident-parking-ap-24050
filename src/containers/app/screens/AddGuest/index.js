@@ -15,8 +15,10 @@ import { addGuest } from '../../redux/actions';
 const AddGuest = (props) => {
   const [values, setValues] = useState({
     date: new Date(),
+    date_to: new Date(),
   });
   const [isDatePickerVisible, setDatePickerVisible] = useState(false);
+  const [isDateToPickerVisible, setDateToPickerVisible] = useState(false);
 
   const onSave = () => {
     if (!values?.name) {
@@ -39,8 +41,13 @@ const AddGuest = (props) => {
       Alert.alert('Date is a required field.');
       return;
     }
-    props.addGuest({ ...values, date: moment(values.date).format('YYYY-MM-DD') });
-    props.navigation.goBack();
+    props.addGuest({
+      ...values,
+      date: moment(values.date).format('YYYY-MM-DD'),
+      date_to: moment(values.date_to).format('YYYY-MM-DD'),
+    }, () => {
+      props.navigation.goBack();
+    });
   };
 
   const onChange = (key, value) => {
@@ -51,8 +58,16 @@ const AddGuest = (props) => {
     setDatePickerVisible(true);
   };
 
+  const showDateToPicker = () => {
+    setDateToPickerVisible(true);
+  };
+
   const hidePicker = () => {
     setDatePickerVisible(false);
+  };
+
+  const hideDateToPicker = () => {
+    setDateToPickerVisible(false);
   };
 
   return (
@@ -87,9 +102,16 @@ const AddGuest = (props) => {
           />
 
           <TouchableOpacity onPress={showPicker}>
-            <Text style={styles.label}>Date:</Text>
+            <Text style={styles.label}>Date from:</Text>
             <View style={styles.input}>
               <Text style={styles.inputText}>{moment(values.date).format('LL')}</Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={showDateToPicker}>
+            <Text style={styles.label}>Date to:</Text>
+            <View style={styles.input}>
+              <Text style={styles.inputText}>{moment(values.date_to).format('LL')}</Text>
             </View>
           </TouchableOpacity>
 
@@ -105,6 +127,7 @@ const AddGuest = (props) => {
       </View>
 
       <DateTimePicker value={values.date} onChange={(v) => onChange('date', v)} visible={isDatePickerVisible} onClose={hidePicker} />
+      <DateTimePicker value={values.date_to} onChange={(v) => onChange('date_to', v)} visible={isDateToPickerVisible} onClose={hideDateToPicker} />
     </SafeAreaView>
   );
 };

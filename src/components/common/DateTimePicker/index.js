@@ -26,6 +26,7 @@ function CustomDateTimePicker({
       display="default"
       testID="dateTimePicker"
       timeZoneOffsetInMinutes={0}
+      style={{ width: '100%', backgroundColor: 'white' }}
     />
   );
 

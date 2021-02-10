@@ -91,7 +91,7 @@ function handleGetWhitelist({ name }) {
   });
 }
 
-function handleAddGuest({ data }) {
+function handleAddGuest({ data, callback }) {
   return sagasRunner({
     actionType: actions.APP_ADD_GUEST,
     loadingType: actions.APP_CHANGE_LOADING_STATE,
@@ -100,6 +100,11 @@ function handleAddGuest({ data }) {
     alertError: true,
     callFunc: addGuest,
     callData: { data },
+    onSuccess: () => {
+      if (callback) {
+        callback();
+      }
+    },
   });
 }
 
